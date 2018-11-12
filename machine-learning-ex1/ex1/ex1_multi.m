@@ -87,13 +87,23 @@ num_iters = 400;
 
 % Init Theta and Run Gradient Descent 
 theta = zeros(3, 1);
-[theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+[theta0, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters);
+[theta1, J_1] = gradientDescentMulti(X, y, theta, 0.03, num_iters);
+[theta2, J_2] = gradientDescentMulti(X, y, theta, 0.1, num_iters);
+[theta3, J_3] = gradientDescentMulti(X, y, theta, 0.3, num_iters);
+[theta4, J_4] = gradientDescentMulti(X, y, theta, 1, num_iters);
+theta = theta0;
 
 % Plot the convergence graph
 figure;
 plot(1:numel(J_history), J_history, '-b', 'LineWidth', 2);
 xlabel('Number of iterations');
 ylabel('Cost J');
+hold on;
+plot(1:numel(J_3), J_3, '-r', 'LineWidth', 2);
+hold on;
+plot(1:numel(J_4), J_4, '-k', 'LineWidth', 2);
+
 
 % Display gradient descent's result
 fprintf('Theta computed from gradient descent: \n');
@@ -104,8 +114,14 @@ fprintf('\n');
 % ====================== YOUR CODE HERE ======================
 % Recall that the first column of X is all-ones. Thus, it does
 % not need to be normalized.
-price = 0; % You should change this
 
+v = [1650, 3];
+v = (v-mu)./sigma;
+v = [1, v];
+price = v*theta;
+
+fprintf('First 10 examples predicted prices: \n');
+fprintf('y = %.0f , p = %.0f \n', [y(1:10,:) X(1:10,:)*theta] ');
 
 % ============================================================
 
@@ -151,8 +167,13 @@ fprintf('\n');
 % ====================== YOUR CODE HERE ======================
 price = 0; % You should change this
 
+v = [1, 1650, 3];
+price = v*theta;
 
 % ============================================================
+
+fprintf('First 10 examples predicted prices: \n');
+fprintf('y = %.0f , p = %.0f \n', [y(1:10,:) X(1:10,:)*theta] ');
 
 fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
          '(using normal equations):\n $%f\n'], price);
