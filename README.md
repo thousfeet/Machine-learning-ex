@@ -1,7 +1,9 @@
 # Machine-learning-ex
 programming exercise answer of Machine Learning course(Andrew Ng)
 
-@toc
+[toc]
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
 ## Programming Exercise 1: Linear Regression
 
